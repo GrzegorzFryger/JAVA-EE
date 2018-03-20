@@ -69,7 +69,7 @@ public class FormServlet extends HttpServlet {
                 request.getSession().setAttribute("user", "user");
                 request.getSession().setAttribute("data", data);
 
-                response.sendRedirect(request.getContextPath() + "/index");
+                response.sendRedirect(request.getContextPath() + "/schedule");
 
 
 
