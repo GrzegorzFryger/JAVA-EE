@@ -9,7 +9,7 @@
         <module name="webapp_zad1" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="9">
       <module name="webapp_zad1" target="1.8" />
     </bytecodeTargetLevel>
   </component>
