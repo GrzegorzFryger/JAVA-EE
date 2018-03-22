@@ -41,7 +41,7 @@
 </table>
     <br> <br>
 
-        <a href="<%= request.getContextPath() + "/download" %>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
+        <a href="<%= request.getContextPath() + "/download" %>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Pobierz Harmonogram</a>
 
 
     <br><br>

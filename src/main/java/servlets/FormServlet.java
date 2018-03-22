@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Null;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,17 +36,17 @@ public class FormServlet extends HttpServlet {
 
         Map<String, String> messages = new HashMap<>();
 
-        if(!isDigit(request.getParameter("amountofcredit")) && request.getParameter("amountofcredit").isEmpty() )
+        if(!isDigit(request.getParameter("amountofcredit")) || request.getParameter("amountofcredit").equals("0") )
         {
            messages.put("message", "niepoprawna kwota dla kwoty");
         }
 
-         if(!isDigit(request.getParameter("numberofinstallment")) && request.getParameter("numberofinstallment").isEmpty())
+         if(!isDigit(request.getParameter("numberofinstallment")) || request.getParameter("numberofinstallment").equals("0"))
         {
             messages.put("message2", "niepoprawna kwota dla ilosci rat");
         }
 
-        if(!isDigit( request.getParameter("interest")) && request.getParameter("interest").isEmpty())
+        if(!isDigit( request.getParameter("interest")) || request.getParameter("interest").equals("0"))
         {
             messages.put("message3", "niepoprawna kwota dla oporcentowania");
         }
