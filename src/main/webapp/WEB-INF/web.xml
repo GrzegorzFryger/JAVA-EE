@@ -1,0 +1,119 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+
+  <display-name>Archetype Created Web Application</display-name>
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>servlets.AdminServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogOutServlet</servlet-name>
+        <servlet-class>servlets.LogOutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogOutServlet</servlet-name>
+        <url-pattern>/log</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>servlets.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>servlets.UserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PremiumServlet</servlet-name>
+        <servlet-class>servlets.PremiumServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PremiumServlet</servlet-name>
+        <url-pattern>/premium</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FromServlet</servlet-name>
+        <servlet-class>servlets.FormServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FromServlet</servlet-name>
+        <url-pattern>/form</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>filters.UserFilter</filter-class>
+
+    </filter>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/user</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>FormFilter</filter-name>
+        <filter-class>filters.FormFilter</filter-class>
+
+    </filter>
+    <filter-mapping>
+        <filter-name>FormFilter</filter-name>
+        <url-pattern>/form</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FormFilter</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>filters.AdminFilter</filter-class>
+
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>PremiumFilter</filter-name>
+        <filter-class>filters.PremiumFilter</filter-class>
+
+    </filter>
+    <filter-mapping>
+        <filter-name>PremiumFilter</filter-name>
+        <url-pattern>/premium</url-pattern>
+    </filter-mapping>
+
+
+
+</web-app>
