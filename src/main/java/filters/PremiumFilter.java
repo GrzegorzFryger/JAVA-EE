@@ -32,32 +32,35 @@ public class PremiumFilter implements Filter {
         HttpSession session = request.getSession(false);
         String loginURI = request.getContextPath() + "/user";
 
-        User temp;
-        boolean loggedIn;
-
-
+        User temp = null;
+        Boolean access;
 
 
         try {
 
+
             temp = (User)session.getAttribute("userData");
-            loggedIn = session != null && temp.getPremium().equals(true);
+            access = (session != null && temp.getPremium().equals(true));
 
-        }catch (NullPointerException e)
-        {
-            loggedIn = false;
+        } catch (NullPointerException e) {
+
+            access = false;
+
         }
 
 
+        if (access) {
 
-        boolean loginRequest = request.getRequestURI().equals(loginURI);
 
-
-        if (loggedIn || loginRequest) {
             chain.doFilter(request, response);
+
         } else {
-            response.sendRedirect(loginURI);
+
+            response.sendRedirect("/user");
         }
+
+
     }
+
 
 }

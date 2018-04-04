@@ -30,6 +30,8 @@ public class FormFilter implements Filter {
         HttpSession session = request.getSession(false);
         String loginURI = request.getContextPath() + "/user";
 
+        System.out.print(loginURI);
+
 
         boolean loggedIn = session != null && session.getAttribute("userData") != null;
         boolean loginRequest = request.getRequestURI().equals(loginURI);

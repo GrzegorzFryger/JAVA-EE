@@ -31,33 +31,37 @@ public class AdminFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
 
         HttpSession session = request.getSession(false);
-        String loginURI = request.getContextPath() + "/user";
 
-        User temp;
-        boolean loggedIn;
-
+        User temp = null;
+        Boolean access;
 
 
-
-       try {
-
-           temp = (User)session.getAttribute("userData");
-           loggedIn = session != null && temp.getAdmin().equals(true);
-
-       }catch (NullPointerException e)
-       {
-           loggedIn = false;
-       }
+        try {
 
 
+            temp = (User)session.getAttribute("userData");
+            access = (session != null && temp.getAdmin().equals(true));
 
-        boolean loginRequest = request.getRequestURI().equals(loginURI);
+        } catch (NullPointerException e) {
 
+            access = false;
 
-        if (loggedIn || loginRequest) {
-            chain.doFilter(request, response);
-        } else {
-            response.sendRedirect(loginURI);
         }
+
+
+        if (access) {
+
+
+            chain.doFilter(request, response);
+
+            } else {
+
+            response.sendRedirect("/user");
+        }
+
+
     }
+
+
 }
+

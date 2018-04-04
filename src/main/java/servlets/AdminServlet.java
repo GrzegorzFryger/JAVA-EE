@@ -21,8 +21,8 @@ import java.util.List;
         urlPatterns = {"/admin"})
 public class AdminServlet extends HttpServlet {
 
-    ConnectionDB connection;
-    UserService userService;
+   private  ConnectionDB connection;
+   private  UserService userService;
 
 
 
@@ -69,7 +69,7 @@ public class AdminServlet extends HttpServlet {
     }
 
 
-    private void forwardListUser(HttpServletRequest req, HttpServletResponse resp)
+    protected void forwardListUser(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String nextJSP = "/WEB-INF/jsp/admin.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
@@ -77,7 +77,7 @@ public class AdminServlet extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
-    private void updatePremiumForUser (HttpServletRequest request, HttpServletResponse response)
+    protected void updatePremiumForUser (HttpServletRequest request, HttpServletResponse response)
     {
 
 
