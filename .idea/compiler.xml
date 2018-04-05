@@ -9,7 +9,7 @@
         <module name="JavaEE zadanie2" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="JavaEE zadanie2" target="1.8" />
     </bytecodeTargetLevel>
   </component>

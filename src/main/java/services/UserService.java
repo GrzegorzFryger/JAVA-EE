@@ -1,6 +1,5 @@
 package services;
 
-import dao.AbstractMapper;
 import dao.UserMapperImpl;
 import model.User;
 import services.interfaces.Repository;

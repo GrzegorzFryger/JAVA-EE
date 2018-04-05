@@ -1,7 +1,6 @@
 package servlets;
 
 import dao.HSQLDBConnection;
-import dao.UserMapperImpl;
 import dao.interfaces.ConnectionDB;
 import model.User;
 import services.UserService;

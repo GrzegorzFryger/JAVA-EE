@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter("/user")
-public class UserFilter implements Filter{
+public class UserFilter implements Filter {
 
     private FilterConfig filterConfig = null;
 
