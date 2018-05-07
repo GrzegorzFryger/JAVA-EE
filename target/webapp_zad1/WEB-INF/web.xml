@@ -1,0 +1,60 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+  version="2.5">
+
+  <servlet>
+    <servlet-name>FormServlet</servlet-name>
+    <servlet-class>servlets.FormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FormServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ScheduleServlet</servlet-name>
+    <servlet-class>servlets.ScheduleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ScheduleServlet</servlet-name>
+    <url-pattern>/schedule</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>PdfServlet</servlet-name>
+    <servlet-class>servlets.PdfServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>PdfServlet</servlet-name>
+    <url-pattern>/download</url-pattern>
+  </servlet-mapping>
+
+
+  <filter>
+    <filter-name>PostDataFilter</filter-name>
+    <filter-class>servlets.SessionFilter</filter-class>
+
+  </filter>
+  <filter-mapping>
+    <filter-name>PostDataFilter</filter-name>
+    <url-pattern>/schedule</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>PdfFilter</filter-name>
+    <filter-class>servlets.PdfFilter</filter-class>
+
+  </filter>
+  <filter-mapping>
+    <filter-name>PdfFilter</filter-name>
+    <url-pattern>/download</url-pattern>
+  </filter-mapping>
+</web-app>
