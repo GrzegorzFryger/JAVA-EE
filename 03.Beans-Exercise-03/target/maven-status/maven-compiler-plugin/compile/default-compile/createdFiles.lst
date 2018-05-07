@@ -1,0 +1,10 @@
+logic\LoanNumberGenerator.class
+filters\Validator.class
+logic\LoanService.class
+filters\AdressFilter.class
+filters\PersonFilter.class
+domain\Address.class
+domain\Person.class
+filters\LoanFormFilter.class
+domain\LoanApplication.class
+domain\LoanParameters.class
