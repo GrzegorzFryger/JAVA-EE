@@ -1,0 +1,39 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         version="2.4">
+
+
+  <display-name>Archetype Created Web Application</display-name>
+
+
+  <filter>
+    <filter-name>PersonFilter</filter-name>
+    <filter-class>filters.PersonFilter</filter-class>
+
+  </filter>
+  <filter-mapping>
+    <filter-name>PersonFilter</filter-name>
+    <url-pattern>/person.jsp</url-pattern>
+  </filter-mapping>
+
+
+  <filter>
+    <filter-name>AdressFilet</filter-name>
+    <filter-class>filters.AdressFilter</filter-class>
+
+  </filter>
+  <filter-mapping>
+    <filter-name>AdressFilet</filter-name>
+    <url-pattern>/adress.jsp</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>LoanInfo</filter-name>
+    <filter-class>filters.LoanFormFilter</filter-class>
+
+  </filter>
+  <filter-mapping>
+    <filter-name>LoanInfo</filter-name>
+    <url-pattern>/loanform.jsp</url-pattern>
+  </filter-mapping>
+</web-app>
