@@ -1,0 +1,186 @@
+{
+	"variables": [],
+	"info": {
+		"name": "MovieRestApi",
+		"_postman_id": "ad1314c9-68f6-7436-ce54-2ce525ef3751",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/MoviesRestApi/api/movieresources/add/movie",
+			"request": {
+				"url": "http://localhost:8080/MoviesRestApi/api/movieresources/add/movie",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"actorList\": [\r\n    \"pierwszy aktor\",\r\n    \"drugi aktor\"\r\n  ],\r\n  \"commentList\": [\r\n    {\r\n      \"comment\": \"Tresc komentarza\",\r\n      \"date\": 1994,\r\n      \r\n      \"name\": \"Grzegorz\",\r\n      \"title\": \"Okropny film\"\r\n    }\r\n  ],\r\n  \"description\": \"Film na podstawie \",\r\n  \"director\": {\r\n    \"biography\": \"brak biografi\",\r\n    \"dateOfBirth\": 1994,\r\n    \"firstName\": \"Jan\",\r\n    \r\n    \"lastName\": \"Kowalski\",\r\n    \"movies\": [\r\n      \"Najlepszy\",\r\n      \"drugi\"\r\n    ],\r\n    \"placeOfBirth\": \"gdansk\"\r\n  },\r\n  \"genres\": [\r\n\t\"ACTION\",\r\n\t\"ADVENTURE\"\r\n],\r\n  \r\n  \"rating\": {\r\n    \"numberOfRating\": 1,\r\n    \"rate\": 6\r\n  },\r\n  \"title\": \"Najlpeszy\",\r\n  \"yearOfRealised\": 2005\r\n}"
+				},
+				"description": "dodawanie filmu"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/MoviesRestApi/api/movieresources/movies",
+			"request": {
+				"url": "http://localhost:8080/MoviesRestApi/api/movieresources/actors/movie/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "lista aktorow z filmu 2"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/MoviesRestApi/api/movieresources/add/actor",
+			"request": {
+				"url": "http://localhost:8080/MoviesRestApi/api/movieresources/add/actor",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"biography\": \"nie ma nic\",\r\n  \"dateOfBirth\": 1996,\r\n  \"firstName\": \"Adam\",\r\n  \r\n  \"lastName\": \"nowak\",\r\n  \"movie\": [\r\n    \"Jesz nie ma\"\r\n  ],\r\n  \"placeOfBirth\": \"warszawa\"\r\n}"
+				},
+				"description": "dodawanie aktora"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/MoviesRestApi/api/movieresources/add/comment/movie/1",
+			"request": {
+				"url": "http://localhost:8080/MoviesRestApi/api/movieresources/add/comment/movie/1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"comment\": \"dodawanie komentarza\",\r\n  \"date\": 2018,\r\n \r\n  \"name\": \"Krzysztof\",\r\n  \"title\": \"test dodawania kometarza\"\r\n}"
+				},
+				"description": "dodawanie komentarza do filmu"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/MoviesRestApi/api/movieresources/movie/1",
+			"request": {
+				"url": "http://localhost:8080/MoviesRestApi/api/movieresources/movie/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "wyswietlanie filmu o id 1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/MoviesRestApi/api\n/movieresources/movies/actor/1",
+			"request": {
+				"url": "http://localhost:8080/MoviesRestApi/api\n/movieresources/movies/actor/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "wyswietlanie filmów aktora o id 1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/MoviesRestApi/api/movieresources/1/comments",
+			"request": {
+				"url": "http://localhost:8080/MoviesRestApi/api/movieresources/1/comments",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "wyswietlanie komentarzy filmu o id 1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/MoviesRestApi/api/movieresources/2/comment/1\n",
+			"request": {
+				"url": "http://localhost:8080/MoviesRestApi/api/movieresources/2/comment/1\n",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": "usuwanie komentarza o id 1  w filmie o id 2"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/MoviesRestApi/api/movieresources/update/movie/1",
+			"request": {
+				"url": "http://localhost:8080/MoviesRestApi/api/movieresources/update/movie/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"actorList\": [\r\n    \"zmiana\",\r\n    \"zmiana\"\r\n  ],\r\n  \"commentList\": [\r\n    {\r\n      \"comment\": \"Tresc komentarza\",\r\n      \"date\": 1994,\r\n      \r\n      \"name\": \"Grzegorz\",\r\n      \"title\": \"Okropny film\"\r\n    }\r\n  ],\r\n  \"description\": \"zmiana \",\r\n  \"director\": {\r\n    \"biography\": \"zmiana\",\r\n    \"dateOfBirth\": 1994,\r\n    \"firstName\": \"Jan\",\r\n    \r\n    \"lastName\": \"Kowalski\",\r\n    \"movies\": [\r\n      \"Najlepszy\",\r\n      \"drugi\"\r\n    ],\r\n    \"placeOfBirth\": \"zmiana\"\r\n  },\r\n  \"genres\": [\r\n\t\"ACTION\",\r\n\t\"ADVENTURE\"\r\n],\r\n  \r\n  \"rating\": {\r\n    \"numberOfRating\": 1,\r\n    \"rate\": 8\r\n  },\r\n  \"title\": \"zmiana\",\r\n  \"yearOfRealised\": 1999\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/MoviesRestApi/api/movieresources/add/rating/movie/1",
+			"request": {
+				"url": "http://localhost:8080/MoviesRestApi/api/movieresources/add/rating/movie/1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"rate\" : \"10.0\"\n}"
+				},
+				"description": "dodawanie oceny do filmu o id 1"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/MoviesRestApi/api/movieresources/add/movie/actor/1",
+			"request": {
+				"url": "http://localhost:8080/MoviesRestApi/api/movieresources/add/movie/actor/1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\":\"zmiana\"\n}\n"
+				},
+				"description": "dodaje do aktora o id 1 film z nazy po tytule lub id \n\nuwaga : wurzuca błąd gdy w bazie jest wiecej filmów o tym samym tytule"
+			},
+			"response": []
+		}
+	]
+}
