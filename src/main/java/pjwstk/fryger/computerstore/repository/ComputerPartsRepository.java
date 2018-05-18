@@ -1,15 +1,34 @@
 package pjwstk.fryger.computerstore.repository;
 
+import net.bytebuddy.description.method.ParameterList;
 import pjwstk.fryger.computerstore.Comment;
 import pjwstk.fryger.computerstore.entity.Part;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.validation.constraints.Min;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComputerPartsRepository
 {
-    public List<Part> getAll() {
-        return null;
+
+   @PersistenceContext
+   EntityManager entityManager;
+
+
+    public List<Part> getAll()
+    {
+
+
+
+        List<Part> a = new ArrayList<>();
+
+
+       // System.out.println();
+
+        return entityManager.createNamedQuery("Part.findAll",Part.class).getResultList();
     }
 
     public Part getById() {

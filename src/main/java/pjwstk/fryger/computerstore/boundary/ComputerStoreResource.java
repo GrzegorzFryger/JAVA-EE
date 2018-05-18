@@ -23,8 +23,8 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ComputerStoreResource
 {
-    @Inject
-    ComputerPartsRepository computerparts;
+   @Inject
+   ComputerPartsRepository computerparts;
 
     @Context
     UriInfo uriInfo;
@@ -39,7 +39,7 @@ public class ComputerStoreResource
 
       try
       {
-        partList =  computerparts.getAll();
+          partList =  computerparts.getAll();
 
       }catch (RuntimeException e)
       {
@@ -47,19 +47,35 @@ public class ComputerStoreResource
          return Response.serverError().build();
       }
 
-      return Response.ok(Response.Status.OK).build();
+      return Response.status(200).entity(partList).build();
 
 
   }
 
     @GET
-    @Path("/computerparts")
-    public String getPartByFilter(@Context UriInfo uriInfoForFilter)
+    @Path("/computerparts/filters")
+    public String getPartByFilter(@QueryParam("price_from") int from,
+                                  @QueryParam("price_to") int to,
+                                  @QueryParam("name") String name,
+                                  @QueryParam("orderBy") List<String> orderBy)
     {
-        MultivaluedMap<String, String> params =
-                uriInfoForFilter.getQueryParameters();
 
-      return  params.getFirst("name");
+
+        if (from != 0 && to != 0)
+        {
+            //do something
+        }
+        if(name != "")
+        {
+            //do something
+        }
+
+
+
+
+
+
+      return  null;
 
 
 
