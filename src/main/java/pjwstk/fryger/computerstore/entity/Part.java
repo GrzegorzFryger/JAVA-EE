@@ -1,31 +1,34 @@
 package pjwstk.fryger.computerstore.entity;
 
-import pjwstk.fryger.computerstore.Comment;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 
 
 @Entity
-@Table(name = "PART")
+@Table(name = "part")
 @NamedQuery(name = "Part.findAll", query = "select p from Part p")
 public class Part
 {
    // public static final String FIND_ALL = "Part.findAll";
     @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private int price;
     private String description;
 
+    @Enumerated(EnumType.STRING)
+    private ComputerPartCategory category;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "part")
+    private List<Comment> comments = new ArrayList<>();
+
     public Part() {
     }
 
 
-    // private ComputerPartCategory category;
-  //  private List<Comment> comments = new ArrayList<>();
+
 
     public String getName() {
         return name;
@@ -51,21 +54,21 @@ public class Part
         this.description = description;
     }
 
-  //  public ComputerPartCategory getCategory() {
-     //   return category;
-    //}
+    public ComputerPartCategory getCategory() {
+       return category;
+    }
 
-    //public void setCategory(ComputerPartCategory category) {
-      //  this.category = category;
-    //}
+    public void setCategory(ComputerPartCategory category) {
+        this.category = category;
+    }
 
-   // public List<Comment> getComments() {
-     //   return comments;
-    //}
+    public List<Comment> getComments() {
+       return comments;
+    }
 
-    //public void setComments(List<Comment> comments) {
-      //  this.comments = comments;
-    //}
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     @Override
     public String toString() {
@@ -73,8 +76,10 @@ public class Part
                 "name='" + name + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
-                ", category=" + //category +
-                ", comments=" +// comments +
+                ", category=" + category +
+                ", comments=" + comments +
                 '}';
     }
+
+
 }

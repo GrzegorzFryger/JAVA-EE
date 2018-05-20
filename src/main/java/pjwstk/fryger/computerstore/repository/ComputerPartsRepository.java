@@ -1,13 +1,10 @@
 package pjwstk.fryger.computerstore.repository;
 
-import net.bytebuddy.description.method.ParameterList;
-import pjwstk.fryger.computerstore.Comment;
+import pjwstk.fryger.computerstore.entity.Comment;
 import pjwstk.fryger.computerstore.entity.Part;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +13,8 @@ public class ComputerPartsRepository
 
    @PersistenceContext
    EntityManager entityManager;
+
+
 
 
     public List<Part> getAll()

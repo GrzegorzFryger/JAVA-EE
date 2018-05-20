@@ -1,16 +1,19 @@
 package pjwstk.fryger.computerstore.boundary;
 
-import com.sun.org.apache.regexp.internal.RESyntaxException;
-import pjwstk.fryger.computerstore.Comment;
+import pjwstk.fryger.computerstore.entity.Comment;
 import pjwstk.fryger.computerstore.entity.Part;
 import pjwstk.fryger.computerstore.repository.ComputerPartsRepository;
+import pjwstk.fryger.computerstore.repository.ComputerPartsRepositoryImplementation;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.List;
 
@@ -26,6 +29,10 @@ public class ComputerStoreResource
    @Inject
    ComputerPartsRepository computerparts;
 
+   @Inject
+    ComputerPartsRepositoryImplementation computerPartsRepository;
+
+
     @Context
     UriInfo uriInfo;
 
@@ -39,7 +46,7 @@ public class ComputerStoreResource
 
       try
       {
-          partList =  computerparts.getAll();
+          partList =  computerPartsRepository.query();
 
       }catch (RuntimeException e)
       {
