@@ -1,9 +1,10 @@
 package pjwstk.fryger.computerstore.boundary;
 
+import pjwstk.fryger.computerstore.criteria.ComputerStoreCriteria;
 import pjwstk.fryger.computerstore.entity.Comment;
 import pjwstk.fryger.computerstore.entity.Part;
 import pjwstk.fryger.computerstore.repository.ComputerPartsRepository;
-import pjwstk.fryger.computerstore.repository.ComputerPartsRepositoryImplementation;
+import pjwstk.fryger.computerstore.repository.ComputerPartsRepositoryTemp;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -27,11 +28,13 @@ import java.util.List;
 public class ComputerStoreResource
 {
    @Inject
-   ComputerPartsRepository computerparts;
+   ComputerPartsRepositoryTemp computerparts;
 
    @Inject
-    ComputerPartsRepositoryImplementation computerPartsRepository;
+   ComputerPartsRepository computerPartsRepository;
 
+   @Inject
+    ComputerStoreCriteria criteria;
 
     @Context
     UriInfo uriInfo;
@@ -46,7 +49,7 @@ public class ComputerStoreResource
 
       try
       {
-          partList =  computerPartsRepository.query();
+          partList =  computerPartsRepository.query(criteria.allEntries());
 
       }catch (RuntimeException e)
       {
@@ -60,29 +63,18 @@ public class ComputerStoreResource
   }
 
     @GET
-    @Path("/computerparts/filters")
-    public String getPartByFilter(@QueryParam("price_from") int from,
+    @Path("/computerparts/query")
+    public Response getPartByFilter(@QueryParam("price_from") int from,
                                   @QueryParam("price_to") int to,
                                   @QueryParam("name") String name,
                                   @QueryParam("orderBy") List<String> orderBy)
     {
 
+        List<Part> list =computerPartsRepository.query(criteria.findByName(name));
 
-        if (from != 0 && to != 0)
-        {
-            //do something
-        }
-        if(name != "")
-        {
-            //do something
-        }
+       return Response.status(200).entity(list).build();
 
 
-
-
-
-
-      return  null;
 
 
 

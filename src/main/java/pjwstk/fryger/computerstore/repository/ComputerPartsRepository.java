@@ -1,56 +1,55 @@
 package pjwstk.fryger.computerstore.repository;
 
-import pjwstk.fryger.computerstore.entity.Comment;
 import pjwstk.fryger.computerstore.entity.Part;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public class ComputerPartsRepository
+public class ComputerPartsRepository implements Repository<Part>
 {
 
-   @PersistenceContext
-   EntityManager entityManager;
+
+
+    private EntityManager en;
 
 
 
-
-    public List<Part> getAll()
+    @Inject
+    public ComputerPartsRepository(EntityManager entityManager)
     {
-
-
-
-        List<Part> a = new ArrayList<>();
-
-
-       // System.out.println();
-
-        return entityManager.createNamedQuery("Part.findAll",Part.class).getResultList();
+        en = entityManager;
     }
 
-    public Part getById() {
-        return null;
-    }
-
-    public Long addPart(Part part) {
-
-        return null;
-    }
-
-    public void updatePart(Long id, Part part)
+    @Override
+    public Part getById(Long id)
     {
+       return  en.find(Part.class,id);
     }
 
-    public List<Comment> getAllComments()
-    {
-        return null;
+
+    @Override
+    public List<Part> query(CriteriaQuery query) {
+
+
+        return en.createQuery(query).getResultList();
+
+
     }
 
-    public void addComment(Long id, Comment comment) {
+    @Override
+    public void add(Part item) {
+
     }
 
-    public void deleteComment( Long id, Long idComment) {
+    @Override
+    public void update(Part item) {
+
+    }
+
+    @Override
+    public void remove(Part item) {
+
     }
 }

@@ -9,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 
 @ApplicationScoped
-public class EntityMenagerProducer implements IEntityMenagerProducer
+public class EntityMenagerProducer
 {
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
