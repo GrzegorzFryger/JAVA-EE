@@ -9,12 +9,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "part")
-@XmlRootElement
+
 public class Part implements Serializable
 {
    // public static final String FIND_ALL = "Part.findAll";
     @Id
-
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int price;

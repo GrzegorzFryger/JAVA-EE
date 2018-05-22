@@ -1,43 +1,41 @@
 package pjwstk.fryger.computerstore.repository;
 
-import pjwstk.fryger.computerstore.entity.Comment;
-import pjwstk.fryger.computerstore.entity.ComputerPartCategory;
+import org.hibernate.exception.ConstraintViolationException;
 import pjwstk.fryger.computerstore.entity.Part;
 import pjwstk.fryger.computerstore.query.Query;
 
+import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
+import javax.transaction.*;
 import java.util.List;
 
 
-
+@Named
+@RequestScoped
 public  class PartsRepository implements Repository<Part>
 {
 
 
-
-
-
-    private EntityManager en;
-
-    private CriteriaBuilder builder;
-    private CriteriaQuery<Part> criteria;
-    private Root<Part> rootEntry;
-
-
+    @Resource
+    private UserTransaction userTransaction;
 
     @Inject
-    public PartsRepository(EntityManager entityManager)
+    private EntityManager en;
+
+
+    public PartsRepository()
     {
-        en = entityManager;
-        this.builder = entityManager.getCriteriaBuilder();
-        this.criteria = builder.createQuery(Part.class);
-        this.rootEntry = criteria.from(Part.class);
+
     }
+
+
 
     @Override
     public Part getById(Long id)
@@ -50,10 +48,13 @@ public  class PartsRepository implements Repository<Part>
     public List<Part> query(Query query) {
 
 
+        CriteriaBuilder builder = en.getCriteriaBuilder();
+        CriteriaQuery<Part> criteria = builder.createQuery(Part.class);;
+        Root<Part> rootEntry = criteria.from(Part.class);
 
 
-        return  en
-                .createQuery(query.toQuery(rootEntry,criteria,builder))
+
+        return  en.createQuery(query.toQuery(rootEntry,criteria,builder))
                 .getResultList();
 
 
@@ -62,40 +63,39 @@ public  class PartsRepository implements Repository<Part>
     @Override
     public Long add(Part item)
     {
+        Part managedEntity = null;
+
+        try {
+
+            userTransaction.begin();
+
+             managedEntity = en.merge(item);
 
 
-        List<Comment> b = new ArrayList<>();
-        Comment c = new Comment();
-        c.setDate(55);
-        c.setId(Long.valueOf(2));
-        c.setComment("sad");
-        c.setName("asd");
-        c.setTitle("sad");
-        b.add(c);
+            userTransaction.commit();
 
-        Part p = new Part();
-        p.setId(Long.valueOf(1));
-       p.setCategory(ComputerPartCategory.GRAPHIC_CARD);
-        p.setDescription("asd");
-        p.setName("test");
-        p.setPrice(188);
-        p.setComments(b);
+        } catch (NotSupportedException | SystemException | SecurityException | IllegalStateException |
+                RollbackException | HeuristicMixedException | HeuristicRollbackException |
+                ConstraintViolationException  e)
+        {
 
+            e.printStackTrace();
 
+        }
 
-
-
-
-            en.persist(p);
-
-
-
-        return item.getId();
+        return managedEntity.getId();
 
     }
 
     @Override
-    public void update(Part item) {
+    public void update(Part item)
+    {
+
+      Part dbPart =  en.getReference(Part.class,item.getId());
+
+
+
+
 
     }
 
