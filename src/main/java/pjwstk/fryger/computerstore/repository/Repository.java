@@ -1,16 +1,17 @@
 package pjwstk.fryger.computerstore.repository;
 
-import javax.persistence.criteria.CriteriaQuery;
+import pjwstk.fryger.computerstore.query.Query;
+
 import java.util.List;
 
-public interface Repository<T>
+public interface Repository<T >
 {
 
     T getById(Long id);
 
-    List<T> query(CriteriaQuery query);
+    List<T> query( Query query);
 
-    void add(T item);
+    Long add(T item);
 
     void update(T item);
 

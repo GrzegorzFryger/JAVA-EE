@@ -1,23 +1,26 @@
 package pjwstk.fryger.computerstore.entity;
 
 import javax.persistence.*;
-import java.util.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 @Table(name = "part")
-@NamedQuery(name = "Part.findAll", query = "select p from Part p")
-public class Part
+@XmlRootElement
+public class Part implements Serializable
 {
    // public static final String FIND_ALL = "Part.findAll";
     @Id
-    @GeneratedValue
+
     private Long id;
     private String name;
     private int price;
     private String description;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private ComputerPartCategory category;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -28,7 +31,13 @@ public class Part
     }
 
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -53,6 +62,7 @@ public class Part
     public void setDescription(String description) {
         this.description = description;
     }
+
 
     public ComputerPartCategory getCategory() {
        return category;

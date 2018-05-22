@@ -1,10 +1,10 @@
 package pjwstk.fryger.computerstore.boundary;
 
-import pjwstk.fryger.computerstore.criteria.ComputerStoreCriteria;
 import pjwstk.fryger.computerstore.entity.Comment;
+import pjwstk.fryger.computerstore.entity.ComputerPartCategory;
 import pjwstk.fryger.computerstore.entity.Part;
-import pjwstk.fryger.computerstore.repository.ComputerPartsRepository;
 import pjwstk.fryger.computerstore.repository.ComputerPartsRepositoryTemp;
+import pjwstk.fryger.computerstore.repository.PartsRepository;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -18,6 +18,8 @@ import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.List;
 
+import static pjwstk.fryger.computerstore.query.PartsQuery.*;
+
 /**
  *
  * @author airhacks.com
@@ -25,16 +27,14 @@ import java.util.List;
 @Path("ComputerStore")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ComputerStoreResource
+public class ComputerStoreResources
 {
    @Inject
    ComputerPartsRepositoryTemp computerparts;
 
    @Inject
-   ComputerPartsRepository computerPartsRepository;
+   PartsRepository partsRepository;
 
-   @Inject
-    ComputerStoreCriteria criteria;
 
     @Context
     UriInfo uriInfo;
@@ -49,11 +49,11 @@ public class ComputerStoreResource
 
       try
       {
-          partList =  computerPartsRepository.query(criteria.allEntries());
+          partList =  partsRepository.query(allParts());
 
       }catch (RuntimeException e)
       {
-          //add class exceptions handler
+
          return Response.serverError().build();
       }
 
@@ -62,23 +62,35 @@ public class ComputerStoreResource
 
   }
 
+
     @GET
     @Path("/computerparts/query")
     public Response getPartByFilter(@QueryParam("price_from") int from,
                                   @QueryParam("price_to") int to,
                                   @QueryParam("name") String name,
-                                  @QueryParam("orderBy") List<String> orderBy)
+                                  @QueryParam("orderBy") ComputerPartCategory  orderBy)
     {
 
-        List<Part> list =computerPartsRepository.query(criteria.findByName(name));
-
-       return Response.status(200).entity(list).build();
 
 
 
+        if ((from !=0) && (to != 0)) {
+            return Response.status(200).entity(partsRepository.query(fidndByPrice(from, to))).build();
+        }
+        if (name != null) {
+            return   Response.status(200).entity(partsRepository.query(findByName(name))).build();
+        }
+        if (orderBy != null) {
+            return Response.status(200).entity(partsRepository.query(findByCategory(orderBy))).build();
+        }
+
+
+        return Response.status(404).entity("brak").build();
 
 
     }
+
+
 
     @GET
     @Path("/computerparts/{id}")
@@ -88,7 +100,7 @@ public class ComputerStoreResource
 
       try
       {
-          part = computerparts.getById();
+          part = partsRepository.getById(id);
 
       }catch (RuntimeException e)
       {
@@ -96,20 +108,20 @@ public class ComputerStoreResource
       }
 
 
-      return Response.ok(Response.Status.OK).build();
+      return Response.status(200).entity(part).build();
 
   }
 
   @POST
   @Path("/computerparts")
-  public Response addComputerPart(@Valid @NotNull Part part)
+  public Response addComputerPart(@Valid  Part part)
   {
 
       Long id;
 
       try
       {
-         id = computerparts.addPart(part);
+         id = partsRepository.add(part);
 
       }catch (RuntimeException e)
       {
@@ -117,9 +129,9 @@ public class ComputerStoreResource
       }
 
       URI uri = uriInfo.getBaseUriBuilder()
-              .path(ComputerStoreResource.class)
+              .path(ComputerStoreResources.class)
               .path("/")
-              .path(ComputerStoreResource.class, "getComputerPartsById").build(id);
+              .path(ComputerStoreResources.class, "getComputerPartsById").build(id);
 
       return Response.ok(uri).build();
 
@@ -141,9 +153,9 @@ public class ComputerStoreResource
       }
 
       URI uri = uriInfo.getBaseUriBuilder()
-              .path(ComputerStoreResource.class)
+              .path(ComputerStoreResources.class)
               .path("/")
-              .path(ComputerStoreResource.class, "getComputerPartsById").build(id);
+              .path(ComputerStoreResources.class, "getComputerPartsById").build(id);
 
       return Response.ok(uri).build();
   }
@@ -182,9 +194,9 @@ public class ComputerStoreResource
         }
 
         URI uri = uriInfo.getBaseUriBuilder()
-                .path(ComputerStoreResource.class)
+                .path(ComputerStoreResources.class)
                 .path("/")
-                .path(ComputerStoreResource.class, "getAllCommentPart").build(id);
+                .path(ComputerStoreResources.class, "getAllCommentPart").build(id);
 
         return Response.ok(uri).build();
 

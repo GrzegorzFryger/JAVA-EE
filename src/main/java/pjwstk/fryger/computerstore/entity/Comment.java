@@ -1,16 +1,19 @@
 package pjwstk.fryger.computerstore.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "comments")
-public class Comment
+@XmlRootElement
+
+public class Comment implements Serializable
 {
     @Id
-    @GeneratedValue
+
     private Long id;
 
     private int date;
