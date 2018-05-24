@@ -1,6 +1,11 @@
-# Build
-mvn clean package && docker build -t pjwstk.fryger/ComputerStore .
 
-# RUN
+#Dokumentacja
+https://app.swaggerhub.com/apis/GrzegorzFryger/ComputerStore/1.0-SNAPSHOT
 
-docker rm -f ComputerStore || true && docker run -d -p 8080:8080 -p 4848:4848 --name ComputerStore pjwstk.fryger/ComputerStore 
+#Dane testowe
+znajudją się w repo, zaimportować do postman  
+
+#Wymagania
+
+Testowane na Payara Server 5.181, przy glassfish wyrzuca bład jak na poniższym screanie (jeszcze nie rozwiązałem co jeste tego powodem) : 
+             
