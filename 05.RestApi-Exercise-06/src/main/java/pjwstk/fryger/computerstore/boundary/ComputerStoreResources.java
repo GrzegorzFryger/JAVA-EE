@@ -122,7 +122,7 @@ public class ComputerStoreResources
 
   @PUT
   @Path("/computerparts/{id}")
-  public Response updateComputerPart(@PathParam("id") @Min(0) Long id, @Valid @NotNull Part part)
+  public Response updateComputerPart(@PathParam("id") @Min(0) Long id, @Valid  Part part)
   {
 
       partsRepository.update(part,id);

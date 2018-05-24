@@ -97,19 +97,21 @@ public class PartsRepository implements Repository<Part> {
     @Override
     public void update(Part item, Long id) {
 
+        Part temp = this.getById(id);
 
         try {
 
             userTransaction.begin();
 
-            Part temp = this.getById(id);
 
-            if (temp != null && item.getId() == id) {
+
+            if (temp != null && item.getId() != id) {
                 temp = item;
+                temp.setId(id);
 
             } else throw new RuntimeException("Null point");
 
-            temp = en.merge(temp);
+             en.merge(temp);
 
 
             userTransaction.commit();
@@ -230,7 +232,7 @@ public class PartsRepository implements Repository<Part> {
                 Collectors.collectingAndThen(
                         Collectors.toList(), list -> {
                             if (list.size() != 1) {
-                                throw new RuntimeException();
+                                throw new RuntimeException( "Not found");
                             }
                             return list.get(0);
                         }

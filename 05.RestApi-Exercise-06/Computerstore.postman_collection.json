@@ -1,0 +1,262 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Computerstore",
+		"_postman_id": "592cd45b-1369-e078-1c54-7857355b6708",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addPart",
+			"request": {
+				"url": "",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "addPart",
+			"request": {
+				"url": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"category\": \"MOTHERBOARDS\",\n        \"comments\": [\n            {\n                \"comment\": \"testowy komentarz\",\n                \"date\": 2018,\n               \n                \"name\": \"grzegorz\",\n                \"title\": \"dodanie komentatza\"\n            }\n        ],\n        \"description\": \"testowy opis\",\n        \"name\": \"Gigabite z270\",\n        \"price\": 1899\n    }"
+				},
+				"description": "dodanawanie produktu "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts",
+			"request": {
+				"url": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Wyswietlanie wszystkich produktow"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/1",
+			"request": {
+				"url": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n        \n        \"category\": \"MOTHERBOARDS\",\n        \"comments\": [\n            {\n                \"comment\": \"nowy\",\n                \"date\": 19,\n\t\t\t    \"name\": \"grzegorz\",\n                \"title\": \"dodanie nowego komentatza\"\n            }\n        ],\n        \"description\": \"nowy opis\",\n        \"name\": \"gigabite z370\",\n        \"price\": 1000\n    }"
+				},
+				"description": "update cześci"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/1/comments/1",
+			"request": {
+				"url": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/1/comments/1",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": "odpinanie komentarza od częsci - nie usuwa z bazy "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/2/comments/",
+			"request": {
+				"url": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/2/comments/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Wyswietla komentarze podanej częsci "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/1/comments",
+			"request": {
+				"url": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/1/comments",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"comment\": \"nowy komentarz\",\n        \"date\": 2016,\n       \n        \"name\": \"grzegdsaorz\",\n        \"title\": \"Nowy komentarz\"\n\t\n}"
+				},
+				"description": "dodawanie komentarzy "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/query?orderBy=HARD_DRIVE",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/query?orderBy=HARD_DRIVE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ComputerStore",
+						"resources",
+						"ComputerStore",
+						"computerparts",
+						"query"
+					],
+					"query": [
+						{
+							"key": "orderBy",
+							"value": "HARD_DRIVE",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Wyszukiwanie po kategorii "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/query?name=Gigabite z270",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/query?price_from=5&price_to=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ComputerStore",
+						"resources",
+						"ComputerStore",
+						"computerparts",
+						"query"
+					],
+					"query": [
+						{
+							"key": "price_from",
+							"value": "5",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "price_to",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "wyszukiwanie po nazwie "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/query?price_from=5&price_to=10",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/query?price_from=5&price_to=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ComputerStore",
+						"resources",
+						"ComputerStore",
+						"computerparts",
+						"query"
+					],
+					"query": [
+						{
+							"key": "price_from",
+							"value": "5",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "price_to",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Wyszukiwanie po cenie "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/3",
+			"request": {
+				"url": "http://localhost:8080/ComputerStore/resources/ComputerStore/computerparts/3",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Wyszukuje produkt po id "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/ComputerStore/resources/CommentsStore/comments",
+			"request": {
+				"url": "http://localhost:8080/ComputerStore/resources/CommentsStore/comments",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Wyswietla wszystki komentarze na serwerze "
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/ComputerStore/resources/CommentsStore/comment/1",
+			"request": {
+				"url": "http://localhost:8080/ComputerStore/resources/CommentsStore/comment/1",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": "usuwa kometarz z bazy "
+			},
+			"response": []
+		}
+	]
+}
