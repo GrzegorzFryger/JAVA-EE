@@ -4,7 +4,7 @@ import pjwstk.fryger.computerstore.query.Query;
 
 import java.util.List;
 
-public interface Repository<T >
+public interface Repository<T>
 {
 
     T getById(Long id);
@@ -13,9 +13,11 @@ public interface Repository<T >
 
     Long add(T item);
 
-    void update(T item);
+    void update(T item, Long id);
 
-    void remove(T item);
+    void remove(Long id);
+
+
 
 
 

@@ -3,7 +3,6 @@ package pjwstk.fryger.computerstore.boundary;
 import pjwstk.fryger.computerstore.entity.Comment;
 import pjwstk.fryger.computerstore.entity.ComputerPartCategory;
 import pjwstk.fryger.computerstore.entity.Part;
-import pjwstk.fryger.computerstore.repository.ComputerPartsRepositoryTemp;
 import pjwstk.fryger.computerstore.repository.PartsRepository;
 
 import javax.inject.Inject;
@@ -20,17 +19,13 @@ import java.util.List;
 
 import static pjwstk.fryger.computerstore.query.PartsQuery.*;
 
-/**
- *
- * @author airhacks.com
- */
+
 @Path("ComputerStore")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ComputerStoreResources
 {
-   @Inject
-   ComputerPartsRepositoryTemp computerparts;
+
 
    @Inject
    PartsRepository partsRepository;
@@ -45,19 +40,13 @@ public class ComputerStoreResources
     public Response getAllComputerParts()
   {
 
-      List<Part> partList;
+      List<Part> partList = partsRepository.query(allParts());
 
-      try
-      {
-          partList =  partsRepository.query(allParts());
-
-      }catch (RuntimeException e)
-      {
-
-         return Response.serverError().build();
+      if(!partList.isEmpty()) {
+          return Response.status(200).entity(partList).build();
       }
-
-      return Response.status(200).entity(partList).build();
+      else
+          return Response.status(404).build();
 
 
   }
@@ -85,7 +74,7 @@ public class ComputerStoreResources
         }
 
 
-        return Response.status(404).entity("brak").build();
+        return Response.status(404).entity("Not found").build();
 
 
     }
@@ -96,19 +85,15 @@ public class ComputerStoreResources
     @Path("/computerparts/{id}")
     public Response getComputerPartsById(@PathParam("id") @Min(0) Long id)
   {
-      Part part;
+      Part part = partsRepository.getById(id);
 
-      try
-      {
-          part = partsRepository.getById(id);
-
-      }catch (RuntimeException e)
-      {
-          throw new RuntimeException(e);
-      }
+      if(part != null) {
+          return Response.status(200).entity(part).build();
+      } else
+          return Response.status(404).entity("Not found").build();
 
 
-      return Response.status(200).entity(part).build();
+
 
   }
 
@@ -117,23 +102,21 @@ public class ComputerStoreResources
   public Response addComputerPart(@Valid  Part part)
   {
 
-      Long id;
+      Long id = partsRepository.add(part);
 
-      try
+      if (id != 0)
       {
-         id = partsRepository.add(part);
+          URI uri = uriInfo.getBaseUriBuilder()
+                  .path(ComputerStoreResources.class)
+                  .path("/")
+                  .path(ComputerStoreResources.class, "getComputerPartsById").build(id);
 
-      }catch (RuntimeException e)
-      {
-          throw new RuntimeException(e);
-      }
+          return Response.ok(uri).build();
 
-      URI uri = uriInfo.getBaseUriBuilder()
-              .path(ComputerStoreResources.class)
-              .path("/")
-              .path(ComputerStoreResources.class, "getComputerPartsById").build(id);
+      }else
+          return Response.status(404).build();
 
-      return Response.ok(uri).build();
+
 
   }
 
@@ -142,15 +125,7 @@ public class ComputerStoreResources
   public Response updateComputerPart(@PathParam("id") @Min(0) Long id, @Valid @NotNull Part part)
   {
 
-
-      try {
-
-          computerparts.updatePart(id,part);
-
-      }catch (RuntimeException e)
-      {
-          throw new RuntimeException(e);
-      }
+      partsRepository.update(part,id);
 
       URI uri = uriInfo.getBaseUriBuilder()
               .path(ComputerStoreResources.class)
@@ -165,33 +140,24 @@ public class ComputerStoreResources
     public Response getAllCommentPart(@PathParam("id") @Min(0) Long id)
     {
 
-        List<Comment> comments;
+        List<Comment> comments = partsRepository.getAllCommentPart(id);
 
-        try
+        if(!comments.isEmpty())
         {
+            return Response.status(200).entity(comments).build();
+        }else
+            return Response.status(404).build();
 
-          comments =  computerparts.getAllComments();
 
-        }catch (RuntimeException e)
-        {
-            throw new RuntimeException(e);
-        }
-
-        return Response.ok(comments).build();
     }
 
     @POST
     @Path("/computerparts/{id}/comments")
     public Response addCommentToPart(@PathParam("id") @Min(0) Long id, @Valid @NotNull Comment comment)
     {
-        try
-        {
-            computerparts.addComment(id,comment);
 
-        }catch (RuntimeException e)
-        {
-            throw new RuntimeException(e);
-        }
+        partsRepository.addCommentToPart(id,comment);
+
 
         URI uri = uriInfo.getBaseUriBuilder()
                 .path(ComputerStoreResources.class)
@@ -206,16 +172,11 @@ public class ComputerStoreResources
     @Path("/computerparts/{id}/comments/{idComment}")
     public Response deleteCommentFromPart(@PathParam("id") @Min(0) Long id, @PathParam("idComment") @Min(0) Long idComment)
     {
-        try {
 
-            computerparts.deleteComment(id,idComment);
 
-        }catch (RuntimeException e)
-        {
-            throw new RuntimeException(e);
-        }
+        partsRepository.remove(id,idComment);
 
-        return Response.ok(Response.Status.OK).build();
+        return Response.status(200).build();
     }
 
 

@@ -1,5 +1,6 @@
 package pjwstk.fryger.computerstore.entity;
 
+import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "part")
+@JsonbPropertyOrder({"id","name","price","description","category","comments"})
 
 public class Part implements Serializable
 {
