@@ -1,0 +1,67 @@
+body {
+    background:#dbdbdb;
+}
+.clear {
+    clear:both;
+}
+.card {
+    width:30em;
+    min-height:19em;
+    background: #fff;
+    margin:2em auto;
+    border-radius: .2em;
+    padding-top:1em;
+    padding-left: 1em;
+    padding-right:1em;
+}
+.city {
+    font-family: Roboto;
+    font-weight: 300;
+    font-size: 1.8em;
+    color:#5b5b5b;
+}
+
+.pressure{
+    float:right;
+    font-family:Roboto;
+    font-weight: 300;
+    font-size: 1.8em;
+    color:#5b5b5b;
+
+}
+.menu {
+    padding-top:2em;
+
+}
+
+.input{
+    font-family: Roboto;
+    font-weight: 300;
+    font-size:1.2em;
+    border-radius: 3em;
+}
+
+.temp {
+    float:right;
+    font-family:Roboto;
+    font-weight: 300;
+    font-size: 8.5em;
+    margin-top:-.75em;
+    color:#5b5b5b;
+}
+.variations {
+    font-family:Roboto;
+    font-wight:300;
+    color:#8c8c8c;
+    list-style:none;
+    margin-left:-2em;
+}
+.kmh {
+    font-size:.8em;
+}
+
+.speed:before {
+    content:url('https://i.imgur.com/luN0Jmq.png');
+}
+
+
