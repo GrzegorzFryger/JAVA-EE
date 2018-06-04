@@ -20,6 +20,11 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>com.oracle.ozark</groupId>
+            <artifactId>ozark</artifactId>
+            <version>1.0.0-m01</version>
+        </dependency>
 
     </dependencies>
     <build>

@@ -1,9 +1,6 @@
 package pjwstk.fryger.services;
 
-import pjwstk.fryger.entity.Coord;
-import pjwstk.fryger.entity.Temperature;
-import pjwstk.fryger.entity.Weather;
-import pjwstk.fryger.entity.Wind;
+import pjwstk.fryger.entity.*;
 
 
 import javax.json.bind.serializer.DeserializationContext;
@@ -15,74 +12,80 @@ public class WeatherDeserializer implements JsonbDeserializer<Weather> {
 
 
     @Override
-    public  Weather deserialize(JsonParser parser, DeserializationContext ctx, Type rtType) {
+    public Weather deserialize(JsonParser parser, DeserializationContext ctx, Type rtType) {
 
         Weather temp = new Weather();
         Temperature temperature = new Temperature();
-        Wind wind = new Wind();
+        ConditionWeather condition = new ConditionWeather();
 
 
         while (parser.hasNext()) {
+
             JsonParser.Event event = parser.next();
 
-            if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("coord")) {
-
-                temp.setCoord(ctx.deserialize(Coord.class, parser));
-
-            }
-            else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("name") )
-            {
+            if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("weather")) {
 
                 parser.next();
-                temp.setName(parser.getString());
-            }
-
-            else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("clouds") )
-            {
-
                 parser.next();
 
-                while (parser.next() !=JsonParser.Event.END_OBJECT ) {
+                while (parser.next() != JsonParser.Event.END_OBJECT) {
 
-                    if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("all"))
-                    {
+                    if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("main")) {
                         parser.next();
-                        temp.setClouds(parser.getString());
+                       condition.setMain(parser.getString());
+
+                    }else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("description")) {
+
+                        parser.next();
+                        condition.setDescription(parser.getString());
+                    }
+                    else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("icon")) {
+
+                        parser.next();
+                        condition.setIcon(parser.getString());
                     }
 
                 }
-            }
+                temp.setCondition(condition);
 
-            else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("wind") )
-            {
+            } else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("id")) {
+
+                parser.next();
+                temp.setId(parser.getString());
+            } else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("name")) {
+
+                parser.next();
+                temp.setCityName(parser.getString());
+            } else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("clouds")) {
 
                 parser.next();
 
-                while (parser.next() !=JsonParser.Event.END_OBJECT ) {
+                while (parser.next() != JsonParser.Event.END_OBJECT) {
 
-                    if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("speed"))
-                    {
+                    if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("all")) {
                         parser.next();
-                        wind.setSpeed(Float.valueOf(parser.getString()));
+                        temp.setCloudiness(parser.getString());
                     }
-                     else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("deg"))
-                    {
+
+                }
+            } else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("wind")) {
+
+                parser.next();
+
+                while (parser.next() != JsonParser.Event.END_OBJECT) {
+
+                    if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("speed")) {
                         parser.next();
-                        wind.setWindDirection(Float.valueOf(parser.getString()));
+                        temp.setWindSpeed(Float.valueOf(parser.getString()));
                     }
 
                 }
 
-                temp.setWind(wind);
-            }
 
-
-
-            else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("main") )
-            {
+            } else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("main")) {
                 parser.next();
 
-                while (parser.next() !=JsonParser.Event.END_OBJECT ) {
+                while (parser.next() != JsonParser.Event.END_OBJECT) {
 
 
                     if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("temp")) {
@@ -90,39 +93,28 @@ public class WeatherDeserializer implements JsonbDeserializer<Weather> {
                         temperature.setAverangeTemp(Float.valueOf(parser.getString()));
                         temp.setTemp(temperature);
 
-                    }
-
-                    else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("pressure")) {
+                    } else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("pressure")) {
                         parser.next();
 
-                        temp.setPressure(Integer.valueOf(parser.getString()));
+                        temp.setPressure(Float.valueOf(parser.getString()));
 
-                    }
-
-                    else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("temp_min")) {
+                    } else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("temp_min")) {
                         parser.next();
                         temperature.setMinTemp(Float.valueOf(parser.getString()));
                         temp.setTemp(temperature);
 
-                    }
-
-
-                    else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("temp_max")) {
+                    } else if (event == JsonParser.Event.KEY_NAME && parser.getString().equals("temp_max")) {
                         parser.next();
                         temperature.setMaxTemp(Float.valueOf(parser.getString()));
                         temp.setTemp(temperature);
-
-                    }
-
-
+                        }
                 }
-
-
             }
         }
 
         return temp;
     }
 }
+
 
 

@@ -1,46 +1,44 @@
 package pjwstk.fryger.entity;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import java.io.Serializable;
+
 
 public class Weather implements Serializable
 {
-    private String name;
-    private Coord coord;
-    private String clouds;
-    private Wind wind;
+
+
+    private String id;
+    private String cityName;
+    private ConditionWeather condition;
     private Temperature temp;
+    private String cloudiness;
+    private float windSpeed;
     private float  pressure;
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Coord getCoord() {
-        return coord;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCoord(Coord coord) {
-        this.coord = coord;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
-    public String getClouds() {
-        return clouds;
+    public ConditionWeather getCondition() {
+        return condition;
     }
 
-    public void setClouds(String clouds) {
-        this.clouds = clouds;
-    }
-
-    public Wind getWind() {
-        return wind;
-    }
-
-    public void setWind(Wind wind) {
-        this.wind = wind;
+    public void setCondition(ConditionWeather condition) {
+        this.condition = condition;
     }
 
     public Temperature getTemp() {
@@ -49,6 +47,22 @@ public class Weather implements Serializable
 
     public void setTemp(Temperature temp) {
         this.temp = temp;
+    }
+
+    public String getCloudiness() {
+        return cloudiness;
+    }
+
+    public void setCloudiness(String cloudiness) {
+        this.cloudiness = cloudiness;
+    }
+
+    public float getWindSpeed() {
+        return windSpeed;
+    }
+
+    public void setWindSpeed(float windSpeed) {
+        this.windSpeed = windSpeed;
     }
 
     public float getPressure() {

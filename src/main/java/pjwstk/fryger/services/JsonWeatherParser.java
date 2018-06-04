@@ -43,8 +43,16 @@ public class JsonWeatherParser
 
     public Weather deserialize(String json)
     {
+        Weather temp = null;
 
-        return jsonb.fromJson(json,Weather.class);
+        try {
+            temp = jsonb.fromJson(json,Weather.class);
+        }catch (NullPointerException e)
+        {
+            e.printStackTrace();
+        }
+
+        return temp;
     }
 
     public String serialize(Weather weather)
